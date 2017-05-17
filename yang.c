@@ -24,10 +24,36 @@ static void query_arri(int *src, int slen, int *dst, int dlen)
 	}
 	if (flag) {
 		printf("have find\n");
-		exit(0);
 	} else {
 		printf("not find\n");
-		exit(-1);
+	}
+}
+
+static void query_location_arri(int *src, int slen, int *dst, int dlen)
+{
+	int *psrc = src, *pdst = dst;
+	int i = 0, j = 0, n = 0;
+#define LEN  32
+	int loc[LEN] = {-1,};
+
+	for (; (i+dlen) <= slen; i++) {
+		for (j = 0; j < dlen; j++) {
+			if ( *(psrc+i+j) != *(dst+j) ) {
+				break;
+			}
+			if ( j == dlen-1 ) {
+				loc[n++] = i;
+			}
+		}
+	}
+	if (loc[0] != -1) {
+		printf("location :");
+		for (i = 0; i < n; i++) {
+			printf("%d, ", loc[i]);
+		}
+		printf("\n");
+	} else {
+		printf("not find\n");
 	}
 }
 
@@ -43,7 +69,14 @@ int main()
 	}
 
 //2.0 查询一段数组在另个集合中出现的位置，即第几个元素之后。考虑是否为子集和集合中可能多处包含这个子集
+	{
+		int src[] = {1, 3, 4, 5, 6, 9, 0, 5, 8, 3, 4};
+		int dst[] = {3, 4};
+		int slen = sizeof(src)/sizeof(src[0]);
+		int dlen = sizeof(dst)/sizeof(dst[0]);
 
+		query_location_arri(src, slen, dst, dlen);
+	}
 //3.0 查询字符串是否出现在另个字符串中。
 
 //3.1 查询字符串在另个字符串中出现的位置
