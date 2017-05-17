@@ -73,14 +73,13 @@ static void query_str(char *src, char *dst)
 				break;
 			}
 		}
-		if (*pdst == '\0') {
-			loc[n] = psrc;
+		if (*(pdst-1) == '\0') {
+			loc[n++] = psrc;
 		}
 	}
-	char *ploc = loc[0];
-	if (ploc != NULL) {
-		for (n = 0; ploc != NULL; ploc++) {
-			printf("%d =%s,", n++, ploc);
+	if (loc[0] != NULL) {
+		for (i = 0; i < n; i++) {
+			printf("%d =%s,", i, loc[i]);
 		}
 		printf("\n");
 	} else {
