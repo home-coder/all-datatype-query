@@ -108,6 +108,7 @@ int main()
 		query_location_arri(src, slen, dst, dlen);
 	}
 //3.0 查询字符串是否出现在另个字符串中。
+//3.1 查询字符串在另个字符串中出现的位置
 	{
 		char *src = "yangzhenningxiaotiqin";
 		char *dst = "tiqi";
@@ -115,7 +116,6 @@ int main()
 		query_str(src, dst);
 	}
 
-//3.1 查询字符串在另个字符串中出现的位置
 
 //4.0 查询字符串数组在另一个字符串数组中是否出现
 
