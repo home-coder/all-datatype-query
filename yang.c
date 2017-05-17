@@ -63,16 +63,18 @@ static void query_str(char *src, char *dst)
 {
 	char *psrc = src, *pdst = dst;
 	char *loc[LEN] = {NULL,};
-	int n = 0;
+	int n = 0, i = 0;
 
-	for (; (psrc + strlen(dst)) <= (&src[strlen(src)]); psrc++) {
-		for (; *pdst != '\0'; pdst++) {
-			if (*psrc != *pdst) {
+	for (; (psrc + strlen(dst)) <= (src + strlen(src)); psrc++) {
+		char *ppsrc = psrc;
+		for (pdst = dst; *pdst != '\0'; pdst++, ppsrc++) {
+			printf("(%c %c)\n", *ppsrc, *pdst);
+			if (*ppsrc != *pdst) {
 				break;
 			}
-			if (*pdst == '\0') {
-				loc[n] = psrc;
-			}
+		}
+		if (*pdst == '\0') {
+			loc[n] = psrc;
 		}
 	}
 	char *ploc = loc[0];
@@ -83,7 +85,7 @@ static void query_str(char *src, char *dst)
 		printf("\n");
 	} else {
 		printf("not find\n");
-	}	
+	}
 }
 
 int main()
@@ -109,7 +111,7 @@ int main()
 //3.0 查询字符串是否出现在另个字符串中。
 	{
 		char *src = "yangzhenningxiaotiqin";
-		char *dst = "tiqin";
+		char *dst = "tiqi";
 
 		query_str(src, dst);
 	}
