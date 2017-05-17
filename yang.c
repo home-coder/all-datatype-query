@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef enum {false = 0, true}bool;
+
 static void query_arri(int *src, int slen, int *dst, int dlen)
 {
 	int *psrc = src, *pdst = dst;	
@@ -57,6 +59,33 @@ static void query_location_arri(int *src, int slen, int *dst, int dlen)
 	}
 }
 
+static void query_str(char *src, char *dst)
+{
+	char *psrc = src, *pdst = dst;
+	char *loc[LEN] = {NULL,};
+	int n = 0;
+
+	for (; (psrc + strlen(dst)) <= (&src[strlen(src)]); psrc++) {
+		for (; *pdst != '\0'; pdst++) {
+			if (*psrc != *pdst) {
+				break;
+			}
+			if (*pdst == '\0') {
+				loc[n] = psrc;
+			}
+		}
+	}
+	char *ploc = loc[0];
+	if (ploc != NULL) {
+		for (n = 0; ploc != NULL; ploc++) {
+			printf("%d =%s,", n++, ploc);
+		}
+		printf("\n");
+	} else {
+		printf("not find\n");
+	}	
+}
+
 int main()
 {
 //1.0 查询一段数组是否在另一个数组中连续排列
@@ -78,6 +107,12 @@ int main()
 		query_location_arri(src, slen, dst, dlen);
 	}
 //3.0 查询字符串是否出现在另个字符串中。
+	{
+		char *src = "yangzhenningxiaotiqin";
+		char *dst = "tiqin";
+
+		query_str(src, dst);
+	}
 
 //3.1 查询字符串在另个字符串中出现的位置
 
