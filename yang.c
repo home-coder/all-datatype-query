@@ -73,7 +73,7 @@ static void query_str(char *src, char *dst)
 				break;
 			}
 		}
-		if (*(pdst-1) == '\0') {
+		if (*pdst == '\0') {
 			loc[n++] = psrc;
 		}
 	}
