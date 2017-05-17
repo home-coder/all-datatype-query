@@ -107,6 +107,14 @@ static void query_arrstr(char **src, char *dst)
 	}
 }
 
+static void query_arrarrstr(char **src, char **dst)
+{
+	char **pdst = dst;
+	for (; *pdst != NULL; pdst++) {
+		query_arrstr(src, *pdst);
+	}
+}
+
 int main()
 {
 //1.0 查询一段数组是否在另一个数组中连续排列
@@ -145,7 +153,12 @@ int main()
 	}
 
 //4.1 查询字符串数组在另一个字符串数组中是否匹配到
+	{
+		char *src[] = {"yangzhenning", "mils", "newton", NULL};
+		char *dst[] = {"newton", "mils"};
 
+		query_arrarrstr(src, dst);
+	}
 
 //5.0 查询整型数组在另一个整型数组中是否出现
 
