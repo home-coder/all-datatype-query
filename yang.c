@@ -111,6 +111,7 @@ static void query_arrarrstr(char **src, char **dst)
 {
 	char **pdst = dst;
 	for (; *pdst != NULL; pdst++) {
+		printf("%s :", *pdst);
 		query_arrstr(src, *pdst);
 	}
 }
@@ -155,7 +156,7 @@ int main()
 //4.1 查询字符串数组在另一个字符串数组中是否匹配到
 	{
 		char *src[] = {"yangzhenning", "mils", "newton", NULL};
-		char *dst[] = {"newton", "mils"};
+		char *dst[] = {"newton", "mils", NULL};
 
 		query_arrarrstr(src, dst);
 	}
