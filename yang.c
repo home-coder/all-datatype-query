@@ -68,7 +68,6 @@ static void query_str(char *src, char *dst)
 	for (; (psrc + strlen(dst)) <= (src + strlen(src)); psrc++) {
 		char *ppsrc = psrc;
 		for (pdst = dst; *pdst != '\0'; pdst++, ppsrc++) {
-			printf("(%c %c)\n", *ppsrc, *pdst);
 			if (*ppsrc != *pdst) {
 				break;
 			}
@@ -84,6 +83,36 @@ static void query_str(char *src, char *dst)
 		printf("\n");
 	} else {
 		printf("not find\n");
+	}
+}
+
+static void query_arrstr(char **src, char *dst)
+{
+	char **psrc = src, *pdst = dst;
+	int i = 0, n = 0;
+	int tag[LEN] = {-1,};
+
+	for (; *psrc != NULL; psrc++, i++) {
+		if ( !strcmp(*psrc, dst) ) {
+			tag[n++] = i;
+		}
+	}
+	if (tag[0] != -1) {
+		for (i = 0; i < n; i++) {
+			printf("tag =%d, ", tag[i]);
+		}
+		printf("\n");
+	} else {
+		printf("not find\n");
+	}
+}
+
+static void query_arrarrstr(char **src, char **dst)
+{
+	char **pdst = dst;
+	for (; *pdst != NULL; pdst++) {
+		printf("%s :", *pdst);
+		query_arrstr(src, *pdst);
 	}
 }
 
@@ -116,10 +145,25 @@ int main()
 		query_str(src, dst);
 	}
 
+//4.0 查询字符串在另一个字符串数组中第几个元素出现
+	{
+		char *src[] = {"yangzhenning", "mils", "newton", "yangzhenning", NULL};
+		char *dst = "yangzhenning";
 
-//4.0 查询字符串数组在另一个字符串数组中是否出现
+		query_arrstr(src, dst);
+	}
 
-//4.1 查询字符串数组在另一个字符串数组的第几个元素出现
+//4.1 查询字符串数组在另一个字符串数组中是否匹配到
+	{
+		char *src[] = {"yangzhenning", "mils", "newton", NULL};
+		char *dst[] = {"newton", "mils", NULL};
+
+		query_arrarrstr(src, dst);
+	}
+
+//5.0 查询整型数组在另一个整型数组中是否出现
+
+//5.1 查询整型数组在一个二维数组中是否出现
 
 	return 0;
 }
